@@ -440,7 +440,6 @@ def test_upload_callback(tmp_dir, dvc, cloud):
     expected_size = os.path.getsize(tmp_dir / "foo")
 
     callback = fsspec.Callback()
-    cloud.mkdir(exist_ok=True, parents=True)
     fs.upload(tmp_dir / "foo", cloud / "foo", callback=callback)
 
     assert callback.size == expected_size
@@ -469,7 +468,6 @@ def test_download_callback(tmp_dir, dvc, cloud, local_cloud):
     fs = cls(**config)
 
     (tmp_dir / "to_upload").write_text("foo")
-    cloud.mkdir(exist_ok=True, parents=True)
     fs.upload(tmp_dir / "to_upload", cloud / "foo")
     expected_size = fs.getsize(cloud / "foo")
 

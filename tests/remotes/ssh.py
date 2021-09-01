@@ -119,4 +119,6 @@ def ssh(ssh_server, monkeypatch):
     # NOTE: see http://github.com/iterative/dvc/pull/3501
     monkeypatch.setattr(SSHFileSystem, "CAN_TRAVERSE", False)
 
-    return SSH(SSH.get_url(**ssh_server))
+    url = SSH(SSH.get_url(**ssh_server))
+    url.mkdir(exist_ok=True, parents=True)
+    return url
