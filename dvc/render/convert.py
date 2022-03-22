@@ -27,7 +27,7 @@ def to_datapoints(renderer_class, data: Dict, props: Dict):
         for filename, file_data in rev_data.get("data", {}).items():
             if "data" in file_data:
                 processed, final_props = converter.convert(
-                    revision, filename, file_data.get("data")
+                    file_data.get("data"), revision, filename
                 )
                 datapoints.extend(processed)
     return datapoints, final_props
